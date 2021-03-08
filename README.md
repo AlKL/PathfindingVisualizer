@@ -1,1 +1,7 @@
-# PathfindingVisualizer
+# Pathfinding Visualizer
+
+Completed:
+- 
+
+Tasks:
+- 
