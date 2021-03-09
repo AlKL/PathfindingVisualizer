@@ -4,7 +4,7 @@ import './Pathfind.css';
 import aStar from '../algorithms/aStar';
 
 const cols = 25;
-const rows = 15;
+const rows = 10;
 
 const NODE_START_ROW = 0;
 const NODE_START_COL = 0;
@@ -14,6 +14,7 @@ const NODE_END_COL = cols - 1;
 const Pathfind = () => {
     const [grid, setGrid] = useState([]);
     const [path, setPath] = useState([]);
+    const [visitedNodes, setVisitedNodes] = useState([]);
 
     useEffect(() => {
         initializeGrid();
@@ -35,7 +36,11 @@ const Pathfind = () => {
 
         const startNode = grid[NODE_START_ROW][NODE_START_COL];
         const endNode = grid[NODE_END_ROW][NODE_END_COL];
-        setPath(aStar(startNode, endNode));
+        let path = aStar(startNode, endNode);
+        startNode.isWall = false;
+        endNode.isWall = false;
+        setPath(path.path);
+        setVisitedNodes(path.visitedNodes);
     };
 
     //Add Neighbours
@@ -66,6 +71,10 @@ const Pathfind = () => {
         this.f = 0;
         this.h = 0;
         this.neighbours = [];
+        this.isWall = false;
+        if (Math.random(1) < 0.2) {
+            this.isWall = true;
+        }
         this.previous = undefined;
         this.addneighbours = function (grid) {
             let i = this.x;
@@ -84,7 +93,7 @@ const Pathfind = () => {
                 return (
                     <div key={rowIndex} className='row-wrapper'>
                         {row.map((col, colIndex) => {
-                            const { isStart, isEnd } = col;
+                            const { isStart, isEnd, isWall } = col;
                             return (
                                 <Node
                                     key={colIndex}
@@ -92,6 +101,7 @@ const Pathfind = () => {
                                     isEnd={isEnd}
                                     row={rowIndex}
                                     col={colIndex}
+                                    isWall={isWall}
                                 />
                             );
                         })}
@@ -101,9 +111,35 @@ const Pathfind = () => {
         </div>
     );
 
+    const visualizeShortestPath = (shortestPathNodes) => {
+        for (let i = 0; i < shortestPathNodes.length; i++) {
+            setTimeout(() => {
+                const node = shortestPathNodes[i];
+                document.getElementById(`node-${node.x}-${node.y}`).className = 'node node-shortest-path';
+            }, 10 * i);
+        }
+    };
+
+    const visualizePath = () => {
+        for (let i = 0; i <= visitedNodes.length; i++) {
+            if (i === visitedNodes.length) {
+                setTimeout(() => {
+                    visualizeShortestPath(path);
+                }, 20 * i);
+            } else {
+                setTimeout(() => {
+                    const node = visitedNodes[i];
+                    document.getElementById(`node-${node.x}-${node.y}`).className = 'node node-visited';
+                }, 20 * i);
+
+            }
+        }
+    };
+
     console.log(path);
     return (
         <div className='wrapper'>
+            <button onClick={visualizePath} >Visualize</button>
             <h1>Pathfind Component</h1>
             {gridWithNode}
         </div>
