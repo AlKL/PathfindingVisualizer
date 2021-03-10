@@ -2,14 +2,15 @@
     height: 40px;
     width: 40px;
     border: 1px solid black;
+    background-color: white;
 }
 
 .node-start {
-    background-color: green;
+    background-color: forestgreen;
 }
 
 .node-end {
-    background-color: red;
+    background-color: crimson;
 }
 
 .node-visited {

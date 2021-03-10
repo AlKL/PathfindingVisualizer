@@ -3,8 +3,8 @@ import Node from './Node/Node';
 import './Pathfind.css';
 import aStar from '../algorithms/aStar';
 
-const cols = 25;
-const rows = 10;
+const cols = 10;
+const rows = 5;
 
 const NODE_START_ROW = 0;
 const NODE_START_COL = 0;
@@ -29,16 +29,15 @@ const Pathfind = () => {
         }
 
         createSpot(grid);
-
         setGrid(grid);
-
         addNeighbours(grid);
 
         const startNode = grid[NODE_START_ROW][NODE_START_COL];
         const endNode = grid[NODE_END_ROW][NODE_END_COL];
-        let path = aStar(startNode, endNode);
         startNode.isWall = false;
         endNode.isWall = false;
+        let path = aStar(startNode, endNode);
+
         setPath(path.path);
         setVisitedNodes(path.visitedNodes);
     };
@@ -115,7 +114,7 @@ const Pathfind = () => {
         for (let i = 0; i < shortestPathNodes.length; i++) {
             setTimeout(() => {
                 const node = shortestPathNodes[i];
-                document.getElementById(`node-${node.x}-${node.y}`).className = 'node node-shortest-path';
+                document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
             }, 10 * i);
         }
     };
@@ -125,21 +124,36 @@ const Pathfind = () => {
             if (i === visitedNodes.length) {
                 setTimeout(() => {
                     visualizeShortestPath(path);
-                }, 20 * i);
+                }, 3 * i);
             } else {
                 setTimeout(() => {
                     const node = visitedNodes[i];
-                    document.getElementById(`node-${node.x}-${node.y}`).className = 'node node-visited';
-                }, 20 * i);
-
+                    document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
+                }, 3 * i);
             }
         }
     };
 
-    console.log(path);
+    const clearBoard = () => {
+        initializeGrid();
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                let x = document.getElementById(`${i}-${j}`).className;
+                if (!(x.includes('node-wall'))) {
+                    document.getElementById(`${i}-${j}`).className = 'node';
+                }
+            }
+        }
+        document.getElementById(`${NODE_START_ROW}-${NODE_START_COL}`).className = 'node node-start';
+        document.getElementById(`${NODE_END_ROW}-${NODE_END_COL}`).className = 'node node-end';
+        console.log('Clear Board Test');
+    };
+
+    // console.log(path);
     return (
         <div className='wrapper'>
             <button onClick={visualizePath} >Visualize</button>
+            <button onClick={clearBoard} >Reset Board</button>
             <h1>Pathfind Component</h1>
             {gridWithNode}
         </div>
