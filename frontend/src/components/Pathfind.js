@@ -36,10 +36,15 @@ const Pathfind = () => {
         const endNode = grid[NODE_END_ROW][NODE_END_COL];
         startNode.isWall = false;
         endNode.isWall = false;
-        let path = aStar(startNode, endNode);
 
-        setPath(path.path);
-        setVisitedNodes(path.visitedNodes);
+        let aStarPath = aStar(startNode, endNode);
+        setPath(aStarPath.path);
+        setVisitedNodes(aStarPath.visitedNodes);
+
+        if (aStarPath.path.length === 0) {
+            console.log('RESET: NO PATH');
+            initializeGrid();
+        }
     };
 
     //Add Neighbours
@@ -110,12 +115,24 @@ const Pathfind = () => {
         </div>
     );
 
+    // const visualizeShortestPath = (shortestPathNodes) => {
+    //     console.log(shortestPathNodes);
+    //     for (let i = 0; i < shortestPathNodes.length; i++) {
+    //         setTimeout(() => {
+    //             const node = shortestPathNodes[i];
+    //             console.log(node);
+    //             document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
+    //         }, 10 * i);
+    //     }
+    // };
+
     const visualizeShortestPath = (shortestPathNodes) => {
-        for (let i = 0; i < shortestPathNodes.length; i++) {
+        for (let k = shortestPathNodes.length - 1; k >= 0; k--) {
             setTimeout(() => {
-                const node = shortestPathNodes[i];
+                console.log(k);
+                const node = shortestPathNodes[k];
                 document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
-            }, 10 * i);
+            }, 1100 * -k);
         }
     };
 
@@ -124,12 +141,12 @@ const Pathfind = () => {
             if (i === visitedNodes.length) {
                 setTimeout(() => {
                     visualizeShortestPath(path);
-                }, 3 * i);
+                }, 10 * i);
             } else {
                 setTimeout(() => {
                     const node = visitedNodes[i];
                     document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
-                }, 3 * i);
+                }, 1 * i);
             }
         }
     };
@@ -146,7 +163,7 @@ const Pathfind = () => {
         }
         document.getElementById(`${NODE_START_ROW}-${NODE_START_COL}`).className = 'node node-start';
         document.getElementById(`${NODE_END_ROW}-${NODE_END_COL}`).className = 'node node-end';
-        console.log('Clear Board Test');
+        // console.log('Clear Board Test');
     };
 
     // console.log(path);

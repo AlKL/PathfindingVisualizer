@@ -31,20 +31,20 @@
         border-radius: 10%;
     }
     50% {
-        background-color: peachpuff;
+        background-color: beige;
     }
     75% {
         transform: scale(1.2);
-        background-color: peachpuff;
+        background-color: beige;
     }
     100% {
         transform: scale(1);
-        background-color: peachpuff;
+        background-color: beige;
     }
 }
 
 .node-wall {
-    background-color: rgb(12, 53, 71);
+    background-color: darkslategray;
 }
 
 .node-shortest-path {
@@ -61,14 +61,14 @@
 @keyframes shortestPath {
     0% {
         transform: scale(0.6);
-        background-color: aquamarine;
+        background-color: turquoise;
     }
     50% {
         transform: scale(1.2);
-        background-color: aquamarine;
+        background-color: turquoise;
     }
     100% {
         transform: scale(1);
-        background-color: aquamarine;
+        background-color: turquoise;
     }
 }

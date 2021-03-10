@@ -6,3 +6,7 @@
 .row-wrapper {
     display: flex;
 }
+
+button {
+    padding: 20px;
+}
