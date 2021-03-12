@@ -1,10 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Node from './Node/Node';
 import './Pathfind.css';
 import aStar from '../algorithms/aStar';
+import bfs from '../algorithms/bfs';
 
-const cols = 10;
-const rows = 5;
+const cols = 20;
+const rows = 20;
 
 const NODE_START_ROW = 0;
 const NODE_START_COL = 0;
@@ -15,6 +17,8 @@ const Pathfind = () => {
     const [grid, setGrid] = useState([]);
     const [path, setPath] = useState([]);
     const [visitedNodes, setVisitedNodes] = useState([]);
+    const [startNode, setStartNode] = useState(null);
+    const [endNode, setEndNode] = useState(null);
 
     useEffect(() => {
         initializeGrid();
@@ -32,19 +36,30 @@ const Pathfind = () => {
         setGrid(grid);
         addNeighbours(grid);
 
-        const startNode = grid[NODE_START_ROW][NODE_START_COL];
-        const endNode = grid[NODE_END_ROW][NODE_END_COL];
-        startNode.isWall = false;
-        endNode.isWall = false;
+        // const tempStartNode = grid[NODE_START_ROW][NODE_START_COL];
+        // const tempEndNode = grid[NODE_END_ROW][NODE_END_COL];
+        const tempStartNode = grid[8][8];
+        const tempEndNode = grid[1][17];
 
-        let aStarPath = aStar(startNode, endNode);
-        setPath(aStarPath.path);
-        setVisitedNodes(aStarPath.visitedNodes);
 
-        if (aStarPath.path.length === 0) {
-            console.log('RESET: NO PATH');
-            initializeGrid();
-        }
+        tempStartNode.isWall = false;
+        // tempStartNode.neighbours[1].isWall = true;
+        // tempStartNode.neighbours[2].isWall = true;
+        // tempStartNode.neighbours[3].isWall = true;
+
+        tempEndNode.isWall = false;
+
+        setStartNode(tempStartNode);
+        setEndNode(tempEndNode);
+
+        // let aStarPath = aStar(tempStartNode, tempEndNode);
+        // setPath(aStarPath.path);
+        // setVisitedNodes(aStarPath.visitedNodes);
+
+        // if (aStarPath.path.length === 0) {
+        //     console.log('RESET: NO PATH');
+        //     initializeGrid();
+        // }
     };
 
     //Add Neighbours
@@ -69,8 +84,11 @@ const Pathfind = () => {
     function Spot(i, j) {
         this.x = i;
         this.y = j;
-        this.isStart = this.x === NODE_START_ROW && this.y === NODE_START_COL;
-        this.isEnd = this.x === NODE_END_ROW && this.y === NODE_END_COL;
+        // this.isStart = this.x === NODE_START_ROW && this.y === NODE_START_COL;
+        this.isStart = this.x === 8 && this.y === 8;
+        // this.isEnd = this.x === NODE_END_ROW && this.y === NODE_END_COL;
+        this.isEnd = this.x === 1 && this.y === 17;
+
         this.g = 0;
         this.f = 0;
         this.h = 0;
@@ -88,6 +106,11 @@ const Pathfind = () => {
             if (j > 0) this.neighbours.push(grid[i][j - 1]);
             if (j < cols - 1) this.neighbours.push(grid[i][j + 1]);
         };
+
+        //BFS attributes
+        this.d = Infinity;      //node's distance
+        this.parent = null;     //node's parent
+        this.color = null;      //node's color
     }
 
     //Grid with Node
@@ -127,26 +150,27 @@ const Pathfind = () => {
     // };
 
     const visualizeShortestPath = (shortestPathNodes) => {
+        const reversed = shortestPathNodes.reverse();
         for (let k = shortestPathNodes.length - 1; k >= 0; k--) {
             setTimeout(() => {
-                console.log(k);
-                const node = shortestPathNodes[k];
+                // console.log(k);
+                const node = reversed[k];
                 document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
-            }, 1100 * -k);
+            }, 50 * k);
         }
     };
 
-    const visualizePath = () => {
+    const visualizePath = (aStarPath, visitedNodes) => {
         for (let i = 0; i <= visitedNodes.length; i++) {
             if (i === visitedNodes.length) {
                 setTimeout(() => {
-                    visualizeShortestPath(path);
-                }, 10 * i);
+                    visualizeShortestPath(aStarPath);
+                }, 50 * i);
             } else {
                 setTimeout(() => {
                     const node = visitedNodes[i];
                     document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
-                }, 1 * i);
+                }, 50 * i);
             }
         }
     };
@@ -161,16 +185,30 @@ const Pathfind = () => {
                 }
             }
         }
-        document.getElementById(`${NODE_START_ROW}-${NODE_START_COL}`).className = 'node node-start';
-        document.getElementById(`${NODE_END_ROW}-${NODE_END_COL}`).className = 'node node-end';
+        document.getElementById(`${startNode.x}-${startNode.y}`).className = 'node node-start';
+        document.getElementById(`${endNode.x}-${endNode.y}`).className = 'node node-end';
         // console.log('Clear Board Test');
+    };
+
+    const visualizeAstar = () => {
+        console.log(endNode);
+        const aStarPath = aStar(startNode, endNode);
+        visualizePath(aStarPath.path, aStarPath.visitedNodes);
+    };
+
+    const visualizeBfs = () => {
+        console.log('Visualizing BFS');
+        console.log(startNode.neighbours);
+        const bfsPath = bfs(startNode, endNode);
+        visualizePath(bfsPath.path, bfsPath.visitedNodes);
     };
 
     // console.log(path);
     return (
         <div className='wrapper'>
-            <button onClick={visualizePath} >Visualize</button>
             <button onClick={clearBoard} >Reset Board</button>
+            <button onClick={visualizeAstar}>Visualize A*</button>
+            <button onClick={visualizeBfs}>Visualize BFS</button>
             <h1>Pathfind Component</h1>
             {gridWithNode}
         </div>
