@@ -206,15 +206,16 @@ const Pathfind = () => {
     var currentElement = null;
 
     var mouseDown = 0;
-
-    document.body.onmousedown = () => {
-        --mouseDown;
+    document.body.onmousedown = (e) => {
+        ++mouseDown;
+        setWall(e.target);
     };
     document.body.onmouseup = () => {
-        ++mouseDown;
+        --mouseDown;
     };
 
     document.body.onmouseover = (e) => {
+        e.preventDefault();
         currentElement = e.target;
         if (mouseDown) {
             setWall(currentElement);
