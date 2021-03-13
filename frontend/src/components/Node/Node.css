@@ -5,6 +5,10 @@
     background-color: white;
 }
 
+.node:hover {
+    background-color: thistle;
+}
+
 .node-start {
     background-color: forestgreen;
 }

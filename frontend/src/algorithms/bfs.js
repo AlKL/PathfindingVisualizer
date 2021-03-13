@@ -1,10 +1,4 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-unused-vars */
-
-
-
-function bfs(startNode, endNode) {
-
+const bfs = (startNode, endNode) => {
     var queue = []; //queue to traverse
     var path = []; //resulting path to return
     var visitedNodes = []; //all traversed nodes
@@ -25,8 +19,8 @@ function bfs(startNode, endNode) {
                 u.neighbours[i].parent = u;
                 visitedNodes.push(u.neighbours[i]);
                 queue.push(u.neighbours[i]);
-                // console.log(visitedNodes);
             } else if (u.neighbours[i] === endNode) {
+                visitedNodes.push(endNode);
                 endNode.parent = u;
                 let x = endNode;
                 while (x.parent) {
@@ -34,21 +28,12 @@ function bfs(startNode, endNode) {
                     x = x.parent;
                 }
                 path.push(x);
-                // console.log(path);
                 return { path, visitedNodes };
             }
         }
     }
-    console.log('error');
-    // console.log(visitedNodes);
+    console.log('Error: unreachable log');
     return { path, visitedNodes };
-}
-
-
-
-// const setColor = (node, color) => {
-//     node.color = color;
-//     // document.getElementById(`${node.x}-${node.y}`).className = `node ${color}`;
-// };
+};
 
 export default bfs;

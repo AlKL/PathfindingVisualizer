@@ -23,7 +23,6 @@ function aStar(startNode, endNode) {
                 path.push(temp.previous);
                 temp = temp.previous;
             }
-            // console.log(path);
             return { path, visitedNodes };
         }
 

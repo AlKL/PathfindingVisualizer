@@ -6,7 +6,7 @@ import aStar from '../algorithms/aStar';
 import bfs from '../algorithms/bfs';
 
 const cols = 20;
-const rows = 20;
+const rows = 9;
 
 const NODE_START_ROW = 0;
 const NODE_START_COL = 0;
@@ -15,8 +15,8 @@ const NODE_END_COL = cols - 1;
 
 const Pathfind = () => {
     const [grid, setGrid] = useState([]);
-    const [path, setPath] = useState([]);
-    const [visitedNodes, setVisitedNodes] = useState([]);
+    // const [path, setPath] = useState([]);
+    // const [visitedNodes, setVisitedNodes] = useState([]);
     const [startNode, setStartNode] = useState(null);
     const [endNode, setEndNode] = useState(null);
 
@@ -36,11 +36,10 @@ const Pathfind = () => {
         setGrid(grid);
         addNeighbours(grid);
 
-        // const tempStartNode = grid[NODE_START_ROW][NODE_START_COL];
-        // const tempEndNode = grid[NODE_END_ROW][NODE_END_COL];
-        const tempStartNode = grid[8][8];
-        const tempEndNode = grid[1][17];
-
+        const tempStartNode = grid[NODE_START_ROW][NODE_START_COL];
+        const tempEndNode = grid[NODE_END_ROW][NODE_END_COL];
+        // const tempStartNode = grid[8][8];
+        // const tempEndNode = grid[1][17];
 
         tempStartNode.isWall = false;
         // tempStartNode.neighbours[1].isWall = true;
@@ -80,23 +79,23 @@ const Pathfind = () => {
         }
     };
 
-    //Spot Constructor
+    //Spot Constructor - this is for attributes and color
     function Spot(i, j) {
         this.x = i;
         this.y = j;
-        // this.isStart = this.x === NODE_START_ROW && this.y === NODE_START_COL;
-        this.isStart = this.x === 8 && this.y === 8;
-        // this.isEnd = this.x === NODE_END_ROW && this.y === NODE_END_COL;
-        this.isEnd = this.x === 1 && this.y === 17;
-
+        this.isStart = this.x === NODE_START_ROW && this.y === NODE_START_COL;
+        // this.isStart = this.x === 8 && this.y === 8;
+        this.isEnd = this.x === NODE_END_ROW && this.y === NODE_END_COL;
+        // this.isEnd = this.x === 1 && this.y === 17;
         this.g = 0;
         this.f = 0;
         this.h = 0;
         this.neighbours = [];
+
         this.isWall = false;
-        if (Math.random(1) < 0.2) {
-            this.isWall = true;
-        }
+        // if (Math.random(1) < 0.2) {
+        //     this.isWall = true;
+        // }
         this.previous = undefined;
         this.addneighbours = function (grid) {
             let i = this.x;
@@ -191,16 +190,52 @@ const Pathfind = () => {
     };
 
     const visualizeAstar = () => {
-        console.log(endNode);
+        console.log('Visualizing A *');
+        // console.log(endNode);
         const aStarPath = aStar(startNode, endNode);
         visualizePath(aStarPath.path, aStarPath.visitedNodes);
     };
 
     const visualizeBfs = () => {
         console.log('Visualizing BFS');
-        console.log(startNode.neighbours);
+        // console.log(startNode.neighbours);
         const bfsPath = bfs(startNode, endNode);
         visualizePath(bfsPath.path, bfsPath.visitedNodes);
+    };
+
+    var currentElement = null;
+
+    var mouseDown = 0;
+
+    document.body.onmousedown = () => {
+        --mouseDown;
+    };
+    document.body.onmouseup = () => {
+        ++mouseDown;
+    };
+
+    document.body.onmouseover = (e) => {
+        currentElement = e.target;
+        if (mouseDown) {
+            setWall(currentElement);
+        }
+    };
+
+    const setWall = (ele) => {
+        if (ele.id) {
+            document.getElementById(`${ele.id}`).className = 'node node-wall';
+
+            //ID breakdown to set grid
+            let eleIdStr = ele.id;
+            var arr = eleIdStr.split(/-/g).slice(0);
+
+            let x = arr[0];
+            let y = arr[1];
+
+            if (grid.length > 0) {
+                grid[x][y].isWall = true;
+            }
+        }
     };
 
     // console.log(path);
