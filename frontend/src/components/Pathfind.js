@@ -45,7 +45,6 @@ const Pathfind = () => {
         // tempStartNode.neighbours[1].isWall = true;
         // tempStartNode.neighbours[2].isWall = true;
         // tempStartNode.neighbours[3].isWall = true;
-
         tempEndNode.isWall = false;
 
         setStartNode(tempStartNode);
@@ -175,18 +174,20 @@ const Pathfind = () => {
     };
 
     const clearBoard = () => {
+        // console.log('Clear Board Test');
         initializeGrid();
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 let x = document.getElementById(`${i}-${j}`).className;
-                if (!(x.includes('node-wall'))) {
-                    document.getElementById(`${i}-${j}`).className = 'node';
-                }
+                // if (x.includes('node-wall')) {
+                grid[i][j].isWall = false;
+                // }
+                document.getElementById(`${i}-${j}`).className = 'node';
             }
         }
-        document.getElementById(`${startNode.x}-${startNode.y}`).className = 'node node-start';
-        document.getElementById(`${endNode.x}-${endNode.y}`).className = 'node node-end';
-        // console.log('Clear Board Test');
+        document.getElementById(`${NODE_START_ROW}-${NODE_START_COL}`).className = 'node node-start';
+        document.getElementById(`${NODE_END_ROW}-${NODE_END_COL}`).className = 'node node-end';
+        console.log(startNode);
     };
 
     const visualizeAstar = () => {
@@ -225,6 +226,7 @@ const Pathfind = () => {
                 document.getElementById(`${e.target.id}`).className = 'node';
                 ++startDown;
             } else if (x.includes('node-end')) {
+                document.getElementById(`${e.target.id}`).className = 'node';
                 ++endDown;
             } else if (x.includes('node')) {
                 setWall(e.target);
@@ -250,6 +252,7 @@ const Pathfind = () => {
             //style the current spot to be node-start
             document.getElementById(`${e.target.id}`).className = 'node node-start';
             // }
+            console.log(startNode);
         }
         if (endDown) {
             --endDown;
@@ -285,16 +288,6 @@ const Pathfind = () => {
                 if (grid.length > 0) {
                     grid[eleArr[0]][eleArr[1]].isWall = true;
                 }
-            }
-        }
-    };
-
-    const moveStart = (ele) => {
-        if (ele.id) {
-            var eleArr = idToGridXY(ele.id);
-            document.getElementById(`${ele.id}`).className = 'node node-start';
-            if (grid.length > 0) {
-                grid[eleArr[0]][eleArr[1]].isStart = true;
             }
         }
     };
