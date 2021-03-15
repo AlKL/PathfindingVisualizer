@@ -9,6 +9,17 @@
     background-color: thistle;
 }
 
+.node2 {
+    animation-name: visitedAnimation;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-out;
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
 .node-start {
     background-color: forestgreen;
 }

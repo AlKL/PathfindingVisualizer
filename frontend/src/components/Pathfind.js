@@ -8,10 +8,10 @@ import bfs from '../algorithms/bfs';
 const cols = 20;
 const rows = 9;
 
-const NODE_START_ROW = 0;
-const NODE_START_COL = 0;
-const NODE_END_ROW = rows - 1;
-const NODE_END_COL = cols - 1;
+const NODE_START_ROW = 4;
+const NODE_START_COL = 2;
+const NODE_END_ROW = rows - 5;
+const NODE_END_COL = cols - 3;
 
 const Pathfind = () => {
     const [grid, setGrid] = useState([]);
@@ -204,39 +204,104 @@ const Pathfind = () => {
     };
 
     var currentElement = null;
-
     var mouseDown = 0;
-    document.body.onmousedown = (e) => {
-        ++mouseDown;
-        setWall(e.target);
-    };
-    document.body.onmouseup = () => {
-        --mouseDown;
-    };
+    var startDown = 0;
+    var endDown = 0;
 
+    //if the element is start, move the element
+    //if the element is just a node, set a wall
+    document.body.onmousedown = (e) => {
+        e.preventDefault();
+
+        //checks if current div has ID (is within the grid)
+        if (e.target.id) {
+            ++mouseDown;
+            //if on grid, x is the class of the node
+            var x = document.getElementById(`${e.target.id}`).className;
+            //if startNode, should be draggable
+            if (x.includes('node-start')) {
+                // console.log('start node');
+                // console.log(`START-DOWN: ${startDown}`);
+                document.getElementById(`${e.target.id}`).className = 'node';
+                ++startDown;
+            } else if (x.includes('node-end')) {
+                ++endDown;
+            } else if (x.includes('node')) {
+                setWall(e.target);
+            }
+        }
+    };
+    document.body.onmouseup = (e) => {
+        e.preventDefault();
+        if (e.target.id) {
+            --mouseDown;
+        }
+        // console.log(mouseDown);
+        if (startDown) {
+            --startDown;
+            // console.log(`START-DOWN: ${startDown}`);
+            // console.log(startNode);
+            //set the initial start point to a regular node
+            document.getElementById(`${startNode.x}-${startNode.y}`).className = 'node';
+            // if (e.target.id) {
+            //set the current spot to be the start node
+            var eleArr = idToGridXY(e.target.id);
+            setStartNode(grid[eleArr[0]][eleArr[1]]);
+            //style the current spot to be node-start
+            document.getElementById(`${e.target.id}`).className = 'node node-start';
+            // }
+        }
+        if (endDown) {
+            --endDown;
+            document.getElementById(`${endNode.x}-${endNode.y}`).className = 'node';
+            var eleEndArr = idToGridXY(e.target.id);
+            setEndNode(grid[eleEndArr[0]][eleEndArr[1]]);
+            document.getElementById(`${e.target.id}`).className = 'node node-end';
+        }
+    };
     document.body.onmouseover = (e) => {
         e.preventDefault();
         currentElement = e.target;
-        if (mouseDown) {
+        if (mouseDown && !startDown && !endDown) {
+            // console.log(mouseDown);
             setWall(currentElement);
         }
+        // else if (mouseDown && startDown) {
+        //     // // moveStart(currentElement);
+        //     if (e.target.id) {
+        //         if (mouseDown) {
+        //             // document.getElementById(`${e.target.id}`).className = 'node node2';
+        //         }
+        //     }
+        // }
     };
 
     const setWall = (ele) => {
+        var notStartEnd = document.getElementById(`${ele.id}`).className;
         if (ele.id) {
-            document.getElementById(`${ele.id}`).className = 'node node-wall';
-
-            //ID breakdown to set grid
-            let eleIdStr = ele.id;
-            var arr = eleIdStr.split(/-/g).slice(0);
-
-            let x = arr[0];
-            let y = arr[1];
-
-            if (grid.length > 0) {
-                grid[x][y].isWall = true;
+            if (!notStartEnd.includes('node-start') && !notStartEnd.includes('node-end')) {
+                var eleArr = idToGridXY(ele.id);
+                document.getElementById(`${ele.id}`).className = 'node node-wall';
+                if (grid.length > 0) {
+                    grid[eleArr[0]][eleArr[1]].isWall = true;
+                }
             }
         }
+    };
+
+    const moveStart = (ele) => {
+        if (ele.id) {
+            var eleArr = idToGridXY(ele.id);
+            document.getElementById(`${ele.id}`).className = 'node node-start';
+            if (grid.length > 0) {
+                grid[eleArr[0]][eleArr[1]].isStart = true;
+            }
+        }
+    };
+
+    const idToGridXY = (eleIdStr) => {
+        var arr = eleIdStr.split(/-/g).slice(0);
+        return arr;
     };
 
     // console.log(path);
