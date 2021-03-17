@@ -4,14 +4,15 @@ import Node from './Node/Node';
 import './Pathfind.css';
 import aStar from '../algorithms/aStar';
 import bfs from '../algorithms/bfs';
+import initializeBoard from './Board/Board';
 
-const cols = 20;
-const rows = 9;
+const cols = 66;
+const rows = 15;
 
-const NODE_START_ROW = 4;
-const NODE_START_COL = 2;
-const NODE_END_ROW = rows - 5;
-const NODE_END_COL = cols - 3;
+const NODE_START_ROW = 7;
+const NODE_START_COL = 25;
+const NODE_END_ROW = rows - 8;
+const NODE_END_COL = cols - 36;
 
 const Pathfind = () => {
     const [grid, setGrid] = useState([]);
@@ -21,11 +22,12 @@ const Pathfind = () => {
     const [endNode, setEndNode] = useState(null);
 
     useEffect(() => {
-        initializeGrid();
+        initializeBoard();
+        // initializeBoard(rows, cols, setGrid, setStartNode, setEndNode);
     }, []);
 
-    //Initializes Grid
-    const initializeGrid = () => {
+    // Initializes Grid
+    const initializeBoard = () => {
         const grid = new Array(rows);
 
         for (let i = 0; i < rows; i++) {
@@ -41,11 +43,11 @@ const Pathfind = () => {
         // const tempStartNode = grid[8][8];
         // const tempEndNode = grid[1][17];
 
-        tempStartNode.isWall = false;
+        // tempStartNode.isWall = false;
         // tempStartNode.neighbours[1].isWall = true;
         // tempStartNode.neighbours[2].isWall = true;
         // tempStartNode.neighbours[3].isWall = true;
-        tempEndNode.isWall = false;
+        // tempEndNode.isWall = false;
 
         setStartNode(tempStartNode);
         setEndNode(tempEndNode);
@@ -60,7 +62,7 @@ const Pathfind = () => {
         // }
     };
 
-    //Add Neighbours
+    // Add Neighbours
     const addNeighbours = (grid) => {
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
@@ -105,15 +107,16 @@ const Pathfind = () => {
             if (j < cols - 1) this.neighbours.push(grid[i][j + 1]);
         };
 
-        //BFS attributes
+        //BFS attributes -> move this into the algorithm
         this.d = Infinity;      //node's distance
         this.parent = null;     //node's parent
         this.color = null;      //node's color
     }
 
-    //Grid with Node
+    // Grid with Node
     const gridWithNode = (
         <div>
+            {console.log(grid)}
             {grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex} className='row-wrapper'>
@@ -151,23 +154,34 @@ const Pathfind = () => {
         const reversed = shortestPathNodes.reverse();
         for (let k = shortestPathNodes.length - 1; k >= 0; k--) {
             setTimeout(() => {
-                // console.log(k);
                 const node = reversed[k];
-                document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
+                if (node.isStart) {
+                    document.getElementById(`${node.x}-${node.y}`).className = 'node node-start';
+                } else if (node.isEnd) {
+                    document.getElementById(`${node.x}-${node.y}`).className = 'node node-end';
+                } else {
+                    document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
+                }
             }, 50 * k);
         }
     };
 
-    const visualizePath = (aStarPath, visitedNodes) => {
+    const visualizePath = (algoPath, visitedNodes) => {
         for (let i = 0; i <= visitedNodes.length; i++) {
             if (i === visitedNodes.length) {
                 setTimeout(() => {
-                    visualizeShortestPath(aStarPath);
+                    visualizeShortestPath(algoPath);
                 }, 50 * i);
             } else {
                 setTimeout(() => {
                     const node = visitedNodes[i];
-                    document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
+                    if (node.isStart) {
+                        document.getElementById(`${node.x}-${node.y}`).className = 'node node-start';
+                    } else if (node.isEnd) {
+                        document.getElementById(`${node.x}-${node.y}`).className = 'node node-end';
+                    } else {
+                        document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
+                    }
                 }, 50 * i);
             }
         }
@@ -175,7 +189,7 @@ const Pathfind = () => {
 
     const clearBoard = () => {
         // console.log('Clear Board Test');
-        initializeGrid();
+        initializeBoard();
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < cols; j++) {
                 let x = document.getElementById(`${i}-${j}`).className;
@@ -190,24 +204,41 @@ const Pathfind = () => {
         console.log(startNode);
     };
 
+    //Resets visited nodes and pathed nodes to regular nodes (leaves walls)
+    const clearPath = () => {
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                let x = document.getElementById(`${i}-${j}`).className;
+                if (x.includes('node-visited')) {
+                    document.getElementById(`${i}-${j}`).className = 'node';
+                } else if (x.includes('node-shortest-path')) {
+                    document.getElementById(`${i}-${j}`).className = 'node';
+                }
+            }
+        }
+    };
+
     const visualizeAstar = () => {
         console.log('Visualizing A *');
-        // console.log(endNode);
+        clearPath();
         const aStarPath = aStar(startNode, endNode);
         visualizePath(aStarPath.path, aStarPath.visitedNodes);
     };
 
     const visualizeBfs = () => {
         console.log('Visualizing BFS');
+        // clearPath();
+        console.log(startNode);
+        console.log(endNode);
         // console.log(startNode.neighbours);
         const bfsPath = bfs(startNode, endNode);
         visualizePath(bfsPath.path, bfsPath.visitedNodes);
     };
 
     var currentElement = null;
-    var mouseDown = 0;
-    var startDown = 0;
-    var endDown = 0;
+    var mouseDown = false;
+    var startDown = false;
+    var endDown = false;
 
     //if the element is start, move the element
     //if the element is just a node, set a wall
@@ -216,7 +247,7 @@ const Pathfind = () => {
 
         //checks if current div has ID (is within the grid)
         if (e.target.id) {
-            ++mouseDown;
+            mouseDown = true;
             //if on grid, x is the class of the node
             var x = document.getElementById(`${e.target.id}`).className;
             //if startNode, should be draggable
@@ -224,10 +255,10 @@ const Pathfind = () => {
                 // console.log('start node');
                 // console.log(`START-DOWN: ${startDown}`);
                 document.getElementById(`${e.target.id}`).className = 'node';
-                ++startDown;
+                startDown = true;
             } else if (x.includes('node-end')) {
                 document.getElementById(`${e.target.id}`).className = 'node';
-                ++endDown;
+                endDown = true;
             } else if (x.includes('node')) {
                 setWall(e.target);
             }
@@ -235,12 +266,12 @@ const Pathfind = () => {
     };
     document.body.onmouseup = (e) => {
         e.preventDefault();
-        if (e.target.id) {
-            --mouseDown;
-        }
+        //when you click on button, it counts as mouseup
+        mouseDown = false;
+        // }
         // console.log(mouseDown);
         if (startDown) {
-            --startDown;
+            startDown = false;
             // console.log(`START-DOWN: ${startDown}`);
             // console.log(startNode);
             //set the initial start point to a regular node
@@ -248,6 +279,7 @@ const Pathfind = () => {
             // if (e.target.id) {
             //set the current spot to be the start node
             var eleArr = idToGridXY(e.target.id);
+            // grid[eleArr[0]][eleArr[1]].isStart = true;
             setStartNode(grid[eleArr[0]][eleArr[1]]);
             //style the current spot to be node-start
             document.getElementById(`${e.target.id}`).className = 'node node-start';
@@ -255,14 +287,16 @@ const Pathfind = () => {
             console.log(startNode);
         }
         if (endDown) {
-            --endDown;
+            endDown = false;
             document.getElementById(`${endNode.x}-${endNode.y}`).className = 'node';
             var eleEndArr = idToGridXY(e.target.id);
+            // grid[eleArr[0]][eleArr[1]].isEnd = true;
             setEndNode(grid[eleEndArr[0]][eleEndArr[1]]);
             document.getElementById(`${e.target.id}`).className = 'node node-end';
         }
     };
     document.body.onmouseover = (e) => {
+        // console.log(e.target);
         e.preventDefault();
         currentElement = e.target;
         if (mouseDown && !startDown && !endDown) {
@@ -280,13 +314,15 @@ const Pathfind = () => {
     };
 
     const setWall = (ele) => {
-        var notStartEnd = document.getElementById(`${ele.id}`).className;
         if (ele.id) {
-            if (!notStartEnd.includes('node-start') && !notStartEnd.includes('node-end')) {
-                var eleArr = idToGridXY(ele.id);
-                document.getElementById(`${ele.id}`).className = 'node node-wall';
-                if (grid.length > 0) {
-                    grid[eleArr[0]][eleArr[1]].isWall = true;
+            var notStartEnd = document.getElementById(`${ele.id}`).className;
+            if (ele.id) {
+                if (!notStartEnd.includes('node-start') && !notStartEnd.includes('node-end')) {
+                    var eleArr = idToGridXY(ele.id);
+                    document.getElementById(`${ele.id}`).className = 'node node-wall';
+                    if (grid.length > 0) {
+                        grid[eleArr[0]][eleArr[1]].isWall = true;
+                    }
                 }
             }
         }
@@ -299,12 +335,18 @@ const Pathfind = () => {
 
     // console.log(path);
     return (
-        <div className='wrapper'>
-            <button onClick={clearBoard} >Reset Board</button>
-            <button onClick={visualizeAstar}>Visualize A*</button>
-            <button onClick={visualizeBfs}>Visualize BFS</button>
-            <h1>Pathfind Component</h1>
-            {gridWithNode}
+        <div>
+            <div className='menu'>
+                <h1>Pathfinding Visualizer</h1>
+                <button onClick={clearBoard} >Reset Board</button>
+                <button onClick={clearPath} >Clear Visuals</button>
+                <button onClick={visualizeAstar}>Visualize A*</button>
+                <button onClick={visualizeBfs}>Visualize BFS</button>
+            </div>
+            <div className='wrapper'>
+                {gridWithNode}
+                {/* {initializeBoard(rows, cols, setGrid, setStartNode, setEndNode)} */}
+            </div>
         </div>
     );
 };

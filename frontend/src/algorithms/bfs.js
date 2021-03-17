@@ -4,6 +4,8 @@ const bfs = (startNode, endNode) => {
     var visitedNodes = []; //all traversed nodes
     let u;
 
+    //reset every color and d
+
     startNode.d = 0;
     startNode.color = 'gray';
     queue.push(startNode);

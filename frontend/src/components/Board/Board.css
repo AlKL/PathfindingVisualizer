@@ -1,0 +1,8 @@
+.row-wrapper {
+    display: flex;
+}
+
+.board {
+    width: 99%;
+    margin: 0 auto;
+}
