@@ -6,7 +6,7 @@
 }
 
 .node:hover {
-    background-color: thistle;
+    /* background-color: thistle; */
 }
 
 .node2 {
@@ -132,4 +132,8 @@
         transform: scale(1.0);
         background-color: rgba(0, 190, 218, 0.75);
     }
+}
+
+.node:drop {
+    background-color: red;
 }

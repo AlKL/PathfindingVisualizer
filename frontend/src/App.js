@@ -16,6 +16,7 @@ import React, { useState } from 'react';
 //-------------------------------------------------------------------
 import Board from './components/Board/Board';
 import Menu from './components/Menu/Menu';
+import Spot from './components/Node/Spot';
 
 const App = () => {
   const [grid, setGrid] = useState([]);
@@ -32,8 +33,25 @@ const App = () => {
         if (x.includes('node-visited') || x.includes('node-shortest-path')) {
           document.getElementById(`${i}-${j}`).className = 'node';
         }
+        // grid[i][j] = null;
+        grid[i][j] = new Spot(i, j, rows, columns);
+        if (x.includes('node-wall')) {
+          grid[i][j].isWall = true;
+        }
       }
     }
+
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < columns; j++) {
+        grid[i][j].addneighbours(grid);
+      }
+    }
+
+    grid[3][2].isStart = false;
+    grid[3][18].isEnd = false;
+
+    grid[startNode.x][startNode.y].isStart = true;
+    grid[endNode.x][endNode.y].isEnd = true;
   };
 
   //clears walls

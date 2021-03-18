@@ -2,9 +2,10 @@ function aStar(startNode, endNode) {
     let openSet = [];
     let closedSet = [];
     let path = [];
-    let visitedNodes =[];
+    let visitedNodes = [];
 
     openSet.push(startNode);
+
     while (openSet.length > 0) {
         let leastIndex = 0;
         for (let i = 0; i < openSet.length; i++) {
@@ -12,11 +13,11 @@ function aStar(startNode, endNode) {
                 leastIndex = i;
             }
         }
-
         let current = openSet[leastIndex];
         visitedNodes.push(current);
 
-        if (current === endNode) {
+        if (current.x === endNode.x && current.y === endNode.y) {
+            console.log(current, endNode);
             let temp = current;
             path.push(temp);
             while (temp.previous) {

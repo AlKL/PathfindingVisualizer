@@ -6,6 +6,7 @@ export const Node = ({ setWall, isStart, isEnd, row, col, isWall }) => {
 
     return (
         <div
+            onMouseLeave={setWall}
             onMouseDown={setWall}
             onMouseOver={setWall}
             onMouseUp={setWall}
