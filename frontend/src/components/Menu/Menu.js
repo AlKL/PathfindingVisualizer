@@ -7,7 +7,6 @@ import bfs from '../../algorithms/bfs';
 import visualizePath from '../Menu/Visualizer';
 
 const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
-
     const visualizeAstar = async () => {
         await clearBoard();
         const aStarPath = aStar(startNode, endNode);
@@ -20,6 +19,11 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
         visualizePath(bfsPath.path, bfsPath.visitedNodes);
     };
 
+    const visualizeDFS = async () => {
+        await clearBoard();
+        console.log('VISUALIZING DFS');
+    };
+
     return (
         <div className='menu-banner'>
             <h1>Pathfinding Visualizer</h1>
@@ -27,6 +31,7 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
             <button onClick={clearBoard}>Clear Board</button>
             <button onClick={visualizeAstar}>Visualize A*</button>
             <button onClick={visualizeBFS}>Visualize BFS</button>
+            <button onClick={visualizeDFS}>Visualize DFS</button>
         </div>
     );
 };
