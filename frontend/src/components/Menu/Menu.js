@@ -7,8 +7,8 @@ import visualizePath from '../Menu/Visualizer';
 
 const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
 
-    const visualizeAstar = () => {
-        clearBoard();
+    const visualizeAstar = async () => {
+        await clearBoard();
         const aStarPath = aStar(startNode, endNode);
         visualizePath(aStarPath.path, aStarPath.visitedNodes);
     };

@@ -36,7 +36,9 @@ const App = () => {
         // grid[i][j] = null;
         grid[i][j] = new Spot(i, j, rows, columns);
         if (x.includes('node-wall')) {
+          // console.log('WALL');
           grid[i][j].isWall = true;
+          // console.log(grid[i-1][j].neighbours);
         }
       }
     }
@@ -52,6 +54,8 @@ const App = () => {
 
     grid[startNode.x][startNode.y].isStart = true;
     grid[endNode.x][endNode.y].isEnd = true;
+    setStartNode(grid[startNode.x][startNode.y]);
+    setEndNode(grid[endNode.x][endNode.y]);
   };
 
   //clears walls

@@ -116,7 +116,7 @@ const Pathfind = () => {
     // Grid with Node
     const gridWithNode = (
         <div>
-            {console.log(grid)}
+            {/* {console.log(grid)} */}
             {grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex} className='row-wrapper'>

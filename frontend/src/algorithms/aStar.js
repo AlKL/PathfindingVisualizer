@@ -17,7 +17,6 @@ function aStar(startNode, endNode) {
         visitedNodes.push(current);
 
         if (current.x === endNode.x && current.y === endNode.y) {
-            console.log(current, endNode);
             let temp = current;
             path.push(temp);
             while (temp.previous) {

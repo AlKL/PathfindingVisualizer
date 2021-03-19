@@ -83,6 +83,7 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
             grid[eleArr[0]][eleArr[1]].isWall = true;
         } else if (e.type === 'mouseup' && wallState) {
             setWallState(false);
+            // console.log(grid[eleArr[0]][eleArr[1]]);
         } else if (e.type === 'mousedown' && thisClassName.includes('node-start')) {
             //must set isStart/change start state/change color
             setStartState(true);
