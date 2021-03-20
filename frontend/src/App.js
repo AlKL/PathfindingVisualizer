@@ -22,8 +22,8 @@ const App = () => {
   const [grid, setGrid] = useState([]);
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
-  const rows = 7;
-  const columns = 62;
+  const rows = 9;
+  const columns = 26;
 
   //does not clear walls
   const clearBoard = () => {
@@ -51,11 +51,14 @@ const App = () => {
 
     grid[3][2].isStart = false;
     grid[3][18].isEnd = false;
+    // grid[5][1].isStart = false;
+    // grid[5][8].isEnd = false;
 
     grid[startNode.x][startNode.y].isStart = true;
     grid[endNode.x][endNode.y].isEnd = true;
     setStartNode(grid[startNode.x][startNode.y]);
     setEndNode(grid[endNode.x][endNode.y]);
+    // console.log(startNode);
   };
 
   //clears walls

@@ -21,7 +21,10 @@ const bfs = (startNode, endNode) => {
                 u.neighbours[i].parent = u;
                 visitedNodes.push(u.neighbours[i]);
                 queue.push(u.neighbours[i]);
-            } else if (u.neighbours[i] === endNode) {
+            }
+
+
+            else if (u.neighbours[i] === endNode) {
                 visitedNodes.push(endNode);
                 endNode.parent = u;
                 let x = endNode;

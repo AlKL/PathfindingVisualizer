@@ -4,6 +4,7 @@ import React from 'react';
 import './Menu.css';
 import aStar from '../../algorithms/aStar';
 import bfs from '../../algorithms/bfs';
+import dfs from '../../algorithms/dfs';
 import visualizePath from '../Menu/Visualizer';
 
 const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
@@ -21,7 +22,8 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
 
     const visualizeDFS = async () => {
         await clearBoard();
-        console.log('VISUALIZING DFS');
+        const dfsPath = dfs(startNode, endNode);
+        visualizePath(dfsPath.path, dfsPath.visitedNodes);
     };
 
     return (
