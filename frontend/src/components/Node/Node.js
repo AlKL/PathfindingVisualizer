@@ -1,5 +1,5 @@
 import React from 'react';
-import './Node.css';
+import '../../styles/Node.css';
 
 export const Node = ({ setWall, isStart, isEnd, row, col, isWall }) => {
     const classes = isStart ? 'node-start' : isWall ? 'node-wall' : isEnd ? 'node-end' : '';

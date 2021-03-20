@@ -7,10 +7,12 @@ const recDfs = (startNode, endNode) => {
 
     u = startNode;
     u.visited = true;
+    visitedNodes.push(u);
 
     for (let i = 0; i < u.neighbours.length; i++) {
-        if (!u.neighbours[i].visited && !(u === endNode) && !u.isWall) {
-            visitedNodes.push(u);
+        // if (!u.neighbours[i].visited && !(u === endNode) && !u.isWall) {
+        if (!u.neighbours[i].visited && !(u === endNode) && !u.neighbours[i].isWall) {
+            // visitedNodes.push(u);
             recDfs(u.neighbours[i], endNode);
             if (found) {
                 path.push(u);

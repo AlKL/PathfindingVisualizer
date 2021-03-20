@@ -1,7 +1,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import './Board.css';
+import '../../styles/Board.css';
 import Node from '../Node/Node';
 import Spot from '../Node/Spot';
 

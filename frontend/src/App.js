@@ -1,22 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-
-// import Pathfind from './components/Pathfind';
-
-// const App = () => {
-//   return (
-//     <div>
-//       <Pathfind />
-//     </div>
-//   );
-// };
-
-// export default App;
-
-//-------------------------------------------------------------------
 import Board from './components/Board/Board';
 import Menu from './components/Menu/Menu';
 import Spot from './components/Node/Spot';
+import './styles/styles.css';
 
 const App = () => {
   const [grid, setGrid] = useState([]);
@@ -91,14 +77,16 @@ const App = () => {
         startNode={startNode}
         endNode={endNode}
       />
-      <Board
-        grid={grid}
-        rows={rows}
-        columns={columns}
-        setGrid={setGrid}
-        setStartNode={setStartNode}
-        setEndNode={setEndNode}
-      />
+      <div className='board'>
+        <Board
+          grid={grid}
+          rows={rows}
+          columns={columns}
+          setGrid={setGrid}
+          setStartNode={setStartNode}
+          setEndNode={setEndNode}
+        />
+      </div>
     </div>
   );
 };

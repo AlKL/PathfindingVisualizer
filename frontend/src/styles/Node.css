@@ -6,7 +6,7 @@
 }
 
 .node:hover {
-    /* background-color: thistle; */
+    border: 1px solid #00A6B7;
 }
 
 .node2 {
@@ -21,20 +21,19 @@
 }
 
 .node-start {
-    background-color: rgb(51, 99, 51);
+    background-color: #556B2F;
 }
 
 .node-end {
     /* background-color: rgb(196, 130, 143); */
-    background-color: rgb(4, 49, 4);
-
+    background-color: #007282;
 }
 
 .node-visited {
     animation-name: visitedAnimation;
-    animation-duration: 0.01s;
+    animation-duration: 2s;
     animation-timing-function: ease-out;
-    animation-delay: 0;
+    animation-delay: 0.1s;
     animation-direction: alternate;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -43,25 +42,47 @@
 
 @keyframes visitedAnimation {
     0% {
-        transform: scale(0.3);
-        background-color: rgba(0, 0, 66, 0.75);
+        background-color: #007282;
         border-radius: 10%;
     }
-    50% {
-        background-color: beige;
+    5% {
+        transform: scale(0.3);
+        background-color: #F7FBEC;
     }
+    /* 50% {
+        background-color: #F7FBEC;
+    } */
     75% {
         transform: scale(1.2);
-        background-color: beige;
+        background-color: #c1caab;
     }
     100% {
         transform: scale(1);
-        background-color: beige;
+        background-color: #A5B08B;
     }
 }
 
+/* @keyframes visitedAnimation {
+    0% {
+        transform: scale(0.3);
+        background-color: #F7FBEC;
+        border-radius: 10%;
+    }
+    50% {
+        background-color: #F7FBEC;
+    }
+    75% {
+        transform: scale(1.2);
+        background-color: #c1caab;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #A5B08B;
+    }
+} */
+
 .node-wall {
-    background-color: gray;
+    background-color: #444939;
 }
 
 .node-shortest-path {
@@ -78,15 +99,15 @@
 @keyframes shortestPath {
     0% {
         transform: scale(0.6);
-        background-color: lightgreen;
+        background-color: #D0E7A3;
     }
     50% {
         transform: scale(1.2);
-        background-color: lightgreen;
+        background-color: #D0E7A3;
     }
     100% {
         transform: scale(1);
-        background-color: lightgreen;
+        background-color:#D0E7A3;
     }
 }
 
