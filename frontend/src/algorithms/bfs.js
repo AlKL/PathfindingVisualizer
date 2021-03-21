@@ -23,7 +23,6 @@ const bfs = (startNode, endNode) => {
                 queue.push(u.neighbours[i]);
             }
 
-
             else if (u.neighbours[i] === endNode) {
                 visitedNodes.push(endNode);
                 endNode.parent = u;

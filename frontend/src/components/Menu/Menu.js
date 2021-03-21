@@ -5,9 +5,10 @@ import '../../styles/Menu.css';
 import aStar from '../../algorithms/aStar';
 import bfs from '../../algorithms/bfs';
 import dfs from '../../algorithms/dfs';
+import dijkstra from '../../algorithms/dijkstra';
 import visualizePath from '../Menu/Visualizer';
 
-const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
+const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
     const reloadPage = () => {
         window.location.reload();
     };
@@ -30,6 +31,12 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
         visualizePath(dfsPath.path, dfsPath.visitedNodes);
     };
 
+    const visualizeDijkstra = async () => {
+        await clearBoard();
+        const dijkstraPath = dijkstra(grid, startNode, endNode);
+        visualizePath(dijkstraPath.path, dijkstraPath.visited);
+    };
+
     return (
         <div className='menu-banner'>
             <h1 onClick={reloadPage}>PATHFINDER</h1>
@@ -38,6 +45,7 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
             <button onClick={visualizeAstar}>Visualize A*</button>
             <button onClick={visualizeBFS}>Visualize BFS</button>
             <button onClick={visualizeDFS}>Visualize DFS</button>
+            <button onClick={visualizeDijkstra}>Visualize Dijkstra</button>
         </div>
     );
 };

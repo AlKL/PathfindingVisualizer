@@ -11,10 +11,12 @@ Completed:
 - Able to move start & end nodes
 
 Tasks:
+- implement my own a*
+- greedy best-first search
 - Wall Randomizer
-- Add a legend
-- Clean it up for production (finish 'frontend')
-- Add more algos after
+- Make it so that you can't call another algo when one is in progress
+- Clean it up for production (finish 'frontend') // finish legend
+- Tutorial/Algo info modal
 
 Clean-up tasks:
 - Doesn't need to be responsive, just a github pages project
@@ -23,6 +25,7 @@ Clean-up tasks:
 
 Algorithms:
 - A*
+- Greedy Best-First Search
+- Dijkstras
 - BFS
 - DFS
-- Dijkstras

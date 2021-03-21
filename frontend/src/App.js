@@ -73,6 +73,7 @@ const App = () => {
   return (
     <div>
       <Menu
+        grid={grid}
         clearBoard={clearBoard}
         resetBoard={resetBoard}
         startNode={startNode}
