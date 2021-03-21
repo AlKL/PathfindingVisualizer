@@ -29,8 +29,8 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
             }
         }
         addNeighbours(grid);
-        setStartNode(grid[3][2]);
-        setEndNode(grid[3][18]);
+        setStartNode(grid[10][5]);
+        setEndNode(grid[10][34]);
         // setStartNode(grid[5][1]);
         // setEndNode(grid[5][8]);
     };

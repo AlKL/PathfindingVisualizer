@@ -11,8 +11,8 @@ Completed:
 - Able to move start & end nodes
 
 Tasks:
-- DFS
 - Wall Randomizer
+- Add a legend
 - Clean it up for production (finish 'frontend')
 - Add more algos after
 

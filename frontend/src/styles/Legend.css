@@ -1,0 +1,8 @@
+.legendWrapper {
+    height: 80px;
+    /* background-color: beige; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+

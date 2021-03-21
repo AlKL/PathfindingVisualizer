@@ -8,6 +8,10 @@ import dfs from '../../algorithms/dfs';
 import visualizePath from '../Menu/Visualizer';
 
 const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
+    const reloadPage = () => {
+        window.location.reload();
+    };
+
     const visualizeAstar = async () => {
         await clearBoard();
         const aStarPath = aStar(startNode, endNode);
@@ -28,7 +32,7 @@ const Menu = ({ resetBoard, clearBoard, startNode, endNode }) => {
 
     return (
         <div className='menu-banner'>
-            <h1>PATHFINDER</h1>
+            <h1 onClick={reloadPage}>PATHFINDER</h1>
             <button onClick={resetBoard}>Reset Board</button>
             <button onClick={clearBoard}>Clear Board</button>
             <button onClick={visualizeAstar}>Visualize A*</button>

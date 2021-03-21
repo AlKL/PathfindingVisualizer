@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import Board from './components/Board/Board';
 import Menu from './components/Menu/Menu';
 import Spot from './components/Node/Spot';
+import Legend from './components/Legend';
 import './styles/styles.css';
 
 const App = () => {
   const [grid, setGrid] = useState([]);
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
-  const rows = 9;
-  const columns = 26;
+  const rows = 13;
+  const columns = 40;
 
   //does not clear walls
   const clearBoard = () => {
@@ -35,8 +36,8 @@ const App = () => {
       }
     }
 
-    grid[3][2].isStart = false;
-    grid[3][18].isEnd = false;
+    grid[10][5].isStart = false;
+    grid[10][34].isEnd = false;
     // grid[5][1].isStart = false;
     // grid[5][8].isEnd = false;
 
@@ -77,6 +78,7 @@ const App = () => {
         startNode={startNode}
         endNode={endNode}
       />
+      <Legend />
       <div className='board'>
         <Board
           grid={grid}

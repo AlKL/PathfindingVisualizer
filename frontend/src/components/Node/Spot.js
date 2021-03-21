@@ -1,10 +1,10 @@
 function Spot(i, j, rows, columns) {
     this.x = i;
     this.y = j;
-    this.isStart = this.x === 3 && this.y === 2;
-    this.isEnd = this.x === 3 && this.y === 18;
-    // this.isStart = this.x === 5 && this.y === 1;
-    // this.isEnd = this.x === 5 && this.y === 8;
+    // this.isStart = this.x === 3 && this.y === 2;
+    // this.isEnd = this.x === 3 && this.y === 18;
+    this.isStart = this.x === 10 && this.y === 5;
+    this.isEnd = this.x === 10 && this.y === 34;
     this.g = 0;
     this.f = 0;
     this.h = 0;
