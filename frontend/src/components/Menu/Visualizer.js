@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const visualizeShortestPath = (shortestPathNodes) => {
     const reversed = shortestPathNodes.reverse();
     for (let k = shortestPathNodes.length - 1; k >= 0; k--) {
@@ -33,6 +34,10 @@ const visualizePath = (algoPath, visitedNodes) => {
             }, 50 * i);
         }
     }
+};
+
+const visualizeWalls = (wallNodes) => {
+    console.log('lol');
 };
 
 export default visualizePath;

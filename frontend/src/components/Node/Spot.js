@@ -5,15 +5,10 @@ function Spot(i, j, rows, columns) {
     // this.isEnd = this.x === 3 && this.y === 18;
     this.isStart = this.x === 10 && this.y === 5;
     this.isEnd = this.x === 10 && this.y === 34;
-    this.g = 0;
-    this.f = 0;
-    this.h = 0;
-    this.neighbours = [];
     this.isWall = false;
     // if (Math.random(1) < 0.2) {
     //     this.isWall = true;
     // }
-    this.previous = undefined;
     this.addneighbours = function (grid) {
         let i = this.x;
         let j = this.y;
@@ -23,7 +18,14 @@ function Spot(i, j, rows, columns) {
         if (i < rows - 1) this.neighbours.push(grid[i + 1][j]);
     };
 
-    //BFS attributes -> move this into the algorithm
+    //A* attributes
+    this.g = 0;
+    this.f = 0;
+    this.h = 0;
+    this.neighbours = [];
+    this.previous = undefined;
+
+    //BFS attributes
     this.d = Infinity;      //node's distance
     this.parent = null;     //node's parent
     this.color = null;      //node's color

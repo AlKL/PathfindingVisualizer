@@ -10,7 +10,9 @@ const App = () => {
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
   const rows = 13;
-  const columns = 40;
+  const columns = 41;
+  // const rows = 20;
+  // const columns = 18;
 
   //does not clear walls
   const clearBoard = () => {
