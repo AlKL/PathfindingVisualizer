@@ -5,13 +5,89 @@ const recursiveWall = (grid) => {
     // let width = 18;
     let height = 13;
     let width = 41;
-
+    let wallPath = [];
     // divide(grid, 0, 0, width, height, choose_orientation(width, height))
-    divide(grid, 0, 0, width, height, chooseOrientation(width, height));
+    divide(grid, 0, 0, width, height, chooseOrientation(width, height), wallPath);
+    console.log(wallPath);
+    return wallPath;
 };
 
-const divide = () => {
-    console.log('lol');
+//a wall cannot be next to anther wall
+//cannot put a wall if x or y is the same as any of the doors
+
+const divide = (grid, x, y, width, height, orientation, wallPath) => {
+    if (width < 3 || height < 3) {
+        return;
+    }
+
+    let horizontal;
+
+    if (orientation === 'HORIZONTAL') {
+        horizontal = true;
+    } else {
+        horizontal = false;
+    }
+
+    // # where will the wall be drawn from?
+    // wx = x + (horizontal ? 0 : rand(width-2))
+    // wy = y + (horizontal ? rand(height-2) : 0)
+    let wallX = x + (horizontal ? 0 : veryRand(1, width - 2));
+    let wallY = y + (horizontal ? veryRand(1, height - 2) : 0);
+    // console.log(wallY, wallX);
+
+    // # where will the passage through the wall exist?
+    // px = wx + (horizontal ? rand(width) : 0)
+    // py = wy + (horizontal ? 0 : rand(height))
+    // let passageX = wallX + (horizontal ? randomInt(width) : 0);
+    // let passageY = wallY + (horizontal ? 0 : randomInt(height));
+
+    var passStart = Math.random(1) > 0.5 ? true : false;
+
+    let passageX = wallX + (horizontal ? (passStart ? width - 1 : 0) : 0);
+    let passageY = wallY + (horizontal ? 0 : (passStart ? height - 1 : 0));
+    // console.log(passageY, passageX);
+    // document.getElementById(`${passageY}-${passageX}`).className = 'node node-passage';
+
+    // # what direction will the wall be drawn?
+    // dx = horizontal ? 1 : 0
+    // dy = horizontal ? 0 : 1
+    let dx = horizontal ? 1 : 0;
+    let dy = horizontal ? 0 : 1;
+
+    // # how long will the wall be?
+    // length = horizontal ? width : height
+    let len = horizontal ? width : height;
+
+    // # what direction is perpendicular to the wall?
+    let dir = horizontal ? 1 : 2;
+
+    for (let i = 0; i < len; i++) {
+        if (!(wallX === passageX) || !(wallY === passageY) && !grid[wallY][wallX].isStart && !grid[wallY][wallX].isEnd) {
+            wallPath.push(grid[wallY][wallX]);
+            grid[wallY][wallX].isWall = true;
+            // document.getElementById(`${wallY}-${wallX}`).className = 'node node-wall';
+        }
+        wallX += dx;
+        wallY += dy;
+    }
+
+    // nx, ny = x, y
+    // w, h = horizontal ? [width, wy-y+1] : [wx-x+1, height]
+    // divide(grid, nx, ny, w, h, choose_orientation(w, h))
+    let newX = x;
+    let newY = y;
+    let w = horizontal ? width : wallX - x;
+    let h = horizontal ? wallY - y : height;
+    divide(grid, newX, newY, w, h, chooseOrientation(w, h), wallPath);
+
+    // nx, ny = horizontal ? [x, wy+1] : [wx+1, y]
+    // w, h = horizontal ? [width, y+height-wy-1] : [x+width-wx-1, height]
+    // divide(grid, nx, ny, w, h, choose_orientation(w, h))
+    newX = horizontal ? x : wallX + 1;
+    newY = horizontal ? wallY + 1 : y;
+    w = horizontal ? width : x + width - wallX - 1;
+    h = horizontal ? y + height - wallY - 1 : height;
+    divide(grid, newX, newY, w, h, chooseOrientation(w, h), wallPath);
 };
 
 const veryRand = (min, max) => {

@@ -8,7 +8,8 @@ import bfs from '../../algorithms/bfs';
 import dfs from '../../algorithms/dfs';
 import dijkstra from '../../algorithms/dijkstra';
 import visualizePath from '../Menu/Visualizer';
-// import recursiveWall from '../../wallAlgos/recursiveWall';
+import visualizeWall from '../Menu/VisualizeWall';
+import recursiveWall from '../../wallAlgos/recursiveWall';
 import stairWall from '../../wallAlgos/stairWall';
 import randomWall from '../../wallAlgos/randomWall';
 
@@ -45,13 +46,21 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
     const visualizeStairWall = async () => {
         await resetBoard();
         const stairWallPath = stairWall(grid);
-
+        visualizeWall(stairWallPath);
         // console.log(wallPath);
     };
 
     const visualizeRandomWall = async () => {
         await resetBoard();
         const randomWallPath = randomWall(grid);
+        visualizeWall(randomWallPath);
+        // console.log();
+    };
+
+    const visualizeRecursiveWall = async () => {
+        await resetBoard();
+        const recursiveWallPath = recursiveWall(grid);
+        visualizeWall(recursiveWallPath);
         // console.log();
     };
 
@@ -66,7 +75,7 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
             <button onClick={visualizeDijkstra}>Visualize Dijkstra</button>
             <button onClick={visualizeStairWall}>Stair Walls</button>
             <button onClick={visualizeRandomWall}>Random Walls</button>
-
+            <button onClick={visualizeRecursiveWall}>Recursive Walls</button>
         </div>
     );
 };

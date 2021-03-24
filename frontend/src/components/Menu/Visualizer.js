@@ -36,8 +36,4 @@ const visualizePath = (algoPath, visitedNodes) => {
     }
 };
 
-const visualizeWalls = (wallNodes) => {
-    console.log('lol');
-};
-
 export default visualizePath;
