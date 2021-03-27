@@ -67,7 +67,21 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode, setMessage }) 
     const visualizeRecursiveWall = async () => {
         await resetBoard();
         setMessage('Initializing Recursive Walls');
-        const recursiveWallPath = recursiveWall(grid);
+        const recursiveWallPath = recursiveWall(grid, 'widthHeightBased');
+        visualizeWall(recursiveWallPath);
+    };
+
+    const visualizeRecursiveWallHorizontal = async () => {
+        await resetBoard();
+        setMessage('Initializing Recursive Walls');
+        const recursiveWallPath = recursiveWall(grid, 'horizontalBased');
+        visualizeWall(recursiveWallPath);
+    };
+
+    const visualizeRecursiveWallVertical = async () => {
+        await resetBoard();
+        setMessage('Initializing Recursive Walls');
+        const recursiveWallPath = recursiveWall(grid, 'verticalBased');
         visualizeWall(recursiveWallPath);
     };
 
@@ -96,13 +110,21 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode, setMessage }) 
             vis: visualizeRecursiveWall
         },
         {
+            name: 'Recursive Walls [Horizontal Skew]',
+            vis: visualizeRecursiveWallHorizontal
+        },
+        {
+            name: 'Recursive Walls [Vertical Skew]',
+            vis: visualizeRecursiveWallVertical
+        },
+        {
             name: 'Stair Walls',
             vis: visualizeStairWall
         },
         {
             name: 'Random Walls',
             vis: visualizeRandomWall
-        }
+        },
     ];
 
     return (
