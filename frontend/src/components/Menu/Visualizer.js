@@ -11,7 +11,7 @@ const visualizeShortestPath = (shortestPathNodes) => {
             } else {
                 document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
             }
-        }, 50 * k);
+        }, 30 * k);
     }
 };
 
@@ -20,7 +20,7 @@ const visualizePath = (algoPath, visitedNodes) => {
         if (i === visitedNodes.length) {
             setTimeout(() => {
                 visualizeShortestPath(algoPath);
-            }, 50 * i);
+            }, 25 * i);
         } else {
             setTimeout(() => {
                 const node = visitedNodes[i];
@@ -31,7 +31,7 @@ const visualizePath = (algoPath, visitedNodes) => {
                 } else {
                     document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
                 }
-            }, 50 * i);
+            }, 25 * i);
         }
     }
 };

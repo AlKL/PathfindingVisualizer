@@ -1,18 +1,21 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Board from './components/Board/Board';
 import Menu from './components/Menu/Menu';
 import Spot from './components/Node/Spot';
 import Legend from './components/Legend';
+import Footer from './components/Footer';
 import './styles/styles.css';
 
 const App = () => {
   const [grid, setGrid] = useState([]);
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
-  const rows = 13;
-  const columns = 41;
-  // const rows = 20;
-  // const columns = 18;
+  const [message, setMessage] = useState('Select an algorithm to visualize!');
+  // const rows = 21;
+  // const columns = 41;
+  const rows = 29;
+  const columns = 61;
 
   //does not clear walls
   const clearBoard = () => {
@@ -38,7 +41,7 @@ const App = () => {
       }
     }
 
-    grid[10][5].isStart = false;
+    grid[10][6].isStart = false;
     grid[10][34].isEnd = false;
     // grid[5][1].isStart = false;
     // grid[5][8].isEnd = false;
@@ -48,6 +51,7 @@ const App = () => {
     setStartNode(grid[startNode.x][startNode.y]);
     setEndNode(grid[endNode.x][endNode.y]);
     // console.log(startNode);
+    setMessage('');
   };
 
   //clears walls
@@ -65,6 +69,7 @@ const App = () => {
         }
       }
     }
+    setMessage('');
   };
 
   const idToGridXY = (eleIdStr) => {
@@ -73,13 +78,14 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='wrapper'>
       <Menu
         grid={grid}
         clearBoard={clearBoard}
         resetBoard={resetBoard}
         startNode={startNode}
         endNode={endNode}
+        setMessage={setMessage}
       />
       <Legend />
       <div className='board'>
@@ -92,6 +98,10 @@ const App = () => {
           setEndNode={setEndNode}
         />
       </div>
+      {/* <div className='message'>
+        {message}
+      </div> */}
+      {/* <Footer /> */}
     </div>
   );
 };

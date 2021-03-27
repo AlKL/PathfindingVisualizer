@@ -1,0 +1,28 @@
+.footer {
+    background-color: #798897;
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+  
+.link {
+    color: white;
+    text-decoration: none;
+    padding-right: 5px;
+}
+
+.link:visited {
+    color: white;
+}
+
+.link:hover {
+    color: #F9F871;
+}
+
+.footerWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    /* justify-content: center; */
+}

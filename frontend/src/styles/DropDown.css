@@ -1,0 +1,40 @@
+ul {
+    margin: 0;
+    padding: 5px 20px;
+    position: absolute;
+    background-color: #798897;
+    color: white;
+    z-index: 100;
+}
+
+ul:first-child {
+    margin-top: 5px;
+}
+
+li {
+    width: 150px;
+    padding: 5px 0;
+    list-style: none;
+    font-size: 13.3333px;
+}
+
+.dropButton button {
+    /* color: red; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listButton {
+    padding: 0;
+}
+
+.arrowContainer {
+    width: 9px;
+}
+
+img {
+    padding-left: 5px;
+    width: 100%;
+}

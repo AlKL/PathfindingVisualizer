@@ -3,12 +3,12 @@
 const recursiveWall = (grid) => {
     // let height = 20;
     // let width = 18;
-    let height = 13;
-    let width = 41;
+    let height = grid.length;
+    let width = grid[0].length;
     let wallPath = [];
     // divide(grid, 0, 0, width, height, choose_orientation(width, height))
     divide(grid, 0, 0, width, height, chooseOrientation(width, height), wallPath);
-    console.log(wallPath);
+    // console.log(wallPath);
     return wallPath;
 };
 
@@ -62,10 +62,12 @@ const divide = (grid, x, y, width, height, orientation, wallPath) => {
     let dir = horizontal ? 1 : 2;
 
     for (let i = 0; i < len; i++) {
-        if (!(wallX === passageX) || !(wallY === passageY) && !grid[wallY][wallX].isStart && !grid[wallY][wallX].isEnd) {
-            wallPath.push(grid[wallY][wallX]);
-            grid[wallY][wallX].isWall = true;
-            // document.getElementById(`${wallY}-${wallX}`).className = 'node node-wall';
+        if (!(wallX === passageX) || !(wallY === passageY)) {
+            if (!(grid[wallY][wallX].isStart) && !(grid[wallY][wallX].isEnd)) {
+                wallPath.push(grid[wallY][wallX]);
+                grid[wallY][wallX].isWall = true;
+                // document.getElementById(`${wallY}-${wallX}`).className = 'node node-wall';
+            }
         }
         wallX += dx;
         wallY += dy;

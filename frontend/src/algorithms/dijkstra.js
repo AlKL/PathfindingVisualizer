@@ -29,7 +29,7 @@ const dijkstra = (grid, startNode, endNode) => {
                     x = x.parent;
                 }
                 path.push(x);
-                console.log(path);
+                // console.log(path);
                 return { path, visited };
             }
         }

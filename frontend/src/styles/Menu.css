@@ -1,6 +1,6 @@
 .menu-banner {
     width: 100%;
-    background-color: darkolivegreen;
+    background-color:#798897;
     display: flex;
 }
 
@@ -13,13 +13,12 @@
 }
 
 .menu-banner h1:hover {
-    color: #00C8ED;
+    color: #F9F871;
 }
-
 
 button {
     color: white;
-    background-color: darkolivegreen;
+    background-color:#798897;
     border: none;
     padding-left: 20px;
     padding-right: 20px;
@@ -27,11 +26,13 @@ button {
 }
 
 button:hover {
-    color: #00C8ED;
+    color: #F9F871;
     outline: none;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 button:focus {
     outline: none;
+    text-decoration: underline;
 }

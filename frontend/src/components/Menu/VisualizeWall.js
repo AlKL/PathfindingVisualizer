@@ -3,7 +3,7 @@ const visualizeWall = (wallPath) => {
         setTimeout(() => {
             // console.log(wallPath[i]);
             document.getElementById(`${wallPath[i].x}-${wallPath[i].y}`).className = 'node node-wall';
-        }, 50 * i);
+        }, 20 * i);
     }
 };
 

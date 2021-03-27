@@ -5,3 +5,12 @@
 .board {
     margin: 0 auto;
 }
+
+.message {
+    /* border: 1px solid black; */
+    /* background-color: beige; */
+    margin-top: 20px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
