@@ -118,7 +118,7 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode, setMessage }) 
             vis: visualizeRecursiveWallVertical
         },
         {
-            name: 'Stair Walls',
+            name: 'Basic Stair Walls',
             vis: visualizeStairWall
         },
         {
@@ -131,15 +131,16 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode, setMessage }) 
         <div className='menu-banner'>
             <h1 onClick={reloadPage}>PATHFINDER</h1>
             <DropDown
-                dropName='Search Algorithms'
+                dropName='Algorithms'
                 itemArray={algoArray}
             />
             <DropDown
-                dropName='Maze Algorithms'
+                dropName='Wall Patterns'
                 itemArray={mazeArray}
             />
             <button onClick={resetBoard}>Reset Board</button>
             <button onClick={clearBoard}>Clear Board [Keep Walls]</button>
+            {/* <button>Speed: </button> */}
         </div>
     );
 };

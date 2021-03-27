@@ -1,6 +1,6 @@
 ul {
     margin: 0;
-    padding: 5px 20px;
+    padding: 0;
     position: absolute;
     background-color: #798897;
     color: white;
@@ -12,22 +12,35 @@ ul:first-child {
 }
 
 li {
-    width: 150px;
-    padding: 5px 0;
     list-style: none;
-    font-size: 13.3333px;
+    font-size: 14px;
+    width: 100%;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #798897;
+
+    /* background-color: red; */
+}
+
+li:hover {
+    background-color: #F9F871;
+    color: #798897;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #F9F871;
+    color: #798897;
+    text-decoration: none;
 }
 
 .dropButton button {
     /* color: red; */
     height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.listButton {
-    padding: 0;
 }
 
 .arrowContainer {

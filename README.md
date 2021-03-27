@@ -14,8 +14,8 @@ Completed:
 - Custom css drop down menu
 
 Tasks:
-- Vertical skew and horizontal skew
 - Speed changer?
+- Button padding
 - implement my own a*
 - greedy best-first search
 - Information on Algo timing [in message]

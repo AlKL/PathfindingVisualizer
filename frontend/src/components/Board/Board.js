@@ -44,7 +44,7 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
     };
 
     const setWall = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         var eleArr = idToGridXY(e.target.id);
         var thisClassName = document.getElementById(e.target.id).className;
 

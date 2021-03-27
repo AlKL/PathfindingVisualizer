@@ -19,37 +19,35 @@ const DropDown = ({ dropName, itemArray }) => {
             <div>
                 <ul>
                     {itemArray.map(algo => (
-                        <li key={algo.name} >
-                            <button
-                                className='listButton'
-                                // onClick={() => { algo.vis(); }}
-                                onMouseDown={() => initAlgo(algo = { algo })}
-                            >
-                                {algo.name}
-                            </button>
+                        <li key={algo.name}
+                            className='listButton'
+                            // onClick={() => { algo.vis(); }}
+                            onMouseDown={() => initAlgo(algo = { algo })}
+                        >
+                            {algo.name}
                         </li>
                     ))}
                 </ul>
-            </div>
+            </div >
         );
     };
 
-    return (
-        <div className='dropButton'>
-            <button onClick={toggleDrop} onBlur={closeDrop}>
-                {/* <button onClick={toggleDrop} > */}
-                {dropName}
-                <div className='arrowContainer'>
-                    <img src={arrowDown} />
-                </div>
-            </button>
-            {/* {console.log(visualizeE)} */}
-            {/* <button onClick={() => visualizeE()}>VIS</button> */}
-            <div>
-                {dropOpen ? listToShow() : ''}
+return (
+    <div className='dropButton' onBlur={closeDrop}>
+        <button onClick={toggleDrop} onBlur={closeDrop}>
+            {/* <button onClick={toggleDrop} > */}
+            {dropName}
+            <div className='arrowContainer'>
+                <img src={arrowDown} />
             </div>
+        </button>
+        {/* {console.log(visualizeE)} */}
+        {/* <button onClick={() => visualizeE()}>VIS</button> */}
+        <div>
+            {dropOpen ? listToShow() : ''}
         </div>
-    );
+    </div>
+);
 };
 
 export default DropDown;
