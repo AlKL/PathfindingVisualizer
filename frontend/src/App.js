@@ -4,7 +4,7 @@ import Board from './components/Board/Board';
 import Menu from './components/Menu/Menu';
 import Spot from './components/Node/Spot';
 import Legend from './components/Legend';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import './styles/styles.css';
 
 const App = () => {
@@ -41,10 +41,10 @@ const App = () => {
       }
     }
 
-    grid[10][6].isStart = false;
-    grid[10][34].isEnd = false;
-    // grid[5][1].isStart = false;
-    // grid[5][8].isEnd = false;
+    // grid[10][6].isStart = false;
+    // grid[10][34].isEnd = false;
+    grid[14][10].isStart = false;
+    grid[14][50].isEnd = false;
 
     grid[startNode.x][startNode.y].isStart = true;
     grid[endNode.x][endNode.y].isEnd = true;

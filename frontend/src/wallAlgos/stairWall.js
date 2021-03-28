@@ -23,15 +23,17 @@ const stairWall = (grid) => {
         j++;
     }
 
-    for (let i = grid.length - 6; i > 7; i--) {
+    console.log(j);
+    console.log(grid.length - 6);
+    console.log(grid[0].length - 2);
+
+    for (let i = grid.length - 6; j < 60; i--) {
         if (!grid[i][j].isStart && !grid[i][j].isEnd) {
-            // document.getElementById(`${i}-${j}`).className = 'node node-wall';
             grid[i][j].isWall = true;
             wallPath.push(grid[i][j]);
         }
         j++;
     }
-
     return wallPath;
 };
 

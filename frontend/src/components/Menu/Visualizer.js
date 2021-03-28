@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-const visualizeShortestPath = (shortestPathNodes) => {
+const visualizeShortestPath = (shortestPathNodes, speed) => {
     const reversed = shortestPathNodes.reverse();
     for (let k = shortestPathNodes.length - 1; k >= 0; k--) {
         setTimeout(() => {
@@ -11,16 +11,28 @@ const visualizeShortestPath = (shortestPathNodes) => {
             } else {
                 document.getElementById(`${node.x}-${node.y}`).className = 'node node-shortest-path';
             }
-        }, 30 * k);
+        }, speed * k);
     }
 };
 
-const visualizePath = (algoPath, visitedNodes) => {
+const visualizePath = (algoPath, visitedNodes, visSpeed) => {
+    let speed;
+    switch (visSpeed) {
+        case 'Fast':
+            speed = 20;
+            break;
+        case 'Medium':
+            speed = 25;
+            break;
+        case 'Slow':
+            speed = 30;
+    }
+
     for (let i = 0; i <= visitedNodes.length; i++) {
         if (i === visitedNodes.length) {
             setTimeout(() => {
-                visualizeShortestPath(algoPath);
-            }, 25 * i);
+                visualizeShortestPath(algoPath, speed);
+            }, speed * i);
         } else {
             setTimeout(() => {
                 const node = visitedNodes[i];
@@ -31,7 +43,7 @@ const visualizePath = (algoPath, visitedNodes) => {
                 } else {
                     document.getElementById(`${node.x}-${node.y}`).className = 'node node-visited';
                 }
-            }, 25 * i);
+            }, speed * i);
         }
     }
 };

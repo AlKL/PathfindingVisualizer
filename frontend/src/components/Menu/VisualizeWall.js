@@ -1,9 +1,24 @@
-const visualizeWall = (wallPath) => {
+/* eslint-disable no-unused-vars */
+const visualizeWall = (wallPath, visSpeed) => {
+
+    let speed;
+    switch (visSpeed) {
+        case 'Fast':
+            speed = 10;
+            break;
+        case 'Medium':
+            speed = 15;
+            break;
+        case 'Slow':
+            speed = 20;
+            break;
+    }
+
     for (let i = 0; i < wallPath.length; i++) {
         setTimeout(() => {
             // console.log(wallPath[i]);
             document.getElementById(`${wallPath[i].x}-${wallPath[i].y}`).className = 'node node-wall';
-        }, 20 * i);
+        }, speed * i);
     }
 };
 

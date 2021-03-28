@@ -12,24 +12,26 @@ Completed:
 - Wall randomizer
 - Legend
 - Custom css drop down menu
+- Speed changer
+
 
 Tasks:
-- Speed changer?
-- Button padding
-- implement my own a*
+
+Next Level:
 - greedy best-first search
+- Tutorial/Algo info modal
 - Information on Algo timing [in message]
 - Information Number of nodes visited [in message]
-- Make it so that you can't call another algo when one is in progress
-- Tutorial/Algo info modal
+- Redux
 
 Clean-up tasks:
+- README
 - Doesn't need to be responsive, just a github pages project
 - Host on Github pages
+- Make it so that you can't call another algo when one is in progress
 
 Algorithms:
 - A*
-- Greedy Best-First Search
 - Dijkstras
 - BFS
 - DFS

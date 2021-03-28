@@ -29,10 +29,10 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
             }
         }
         addNeighbours(grid);
-        setStartNode(grid[10][6]);
-        setEndNode(grid[10][34]);
-        // setStartNode(grid[5][1]);
-        // setEndNode(grid[5][8]);
+        // setStartNode(grid[10][6]);
+        // setEndNode(grid[10][34]);
+        setStartNode(grid[14][10]);
+        setEndNode(grid[14][50]);
     };
 
     const addNeighbours = (grid) => {

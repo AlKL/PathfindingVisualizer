@@ -6,7 +6,7 @@
 }
 
 .node:hover {
-    border: 1px solid #00A6B7;
+    border: 1px solid #DC143C;
 }
 
 .node-start {
@@ -17,7 +17,6 @@
 .node-end {
     background-color: #DC143C;
     border: 1px solid #DC143C;
-
 }
 
 .node-wall {
@@ -47,7 +46,8 @@
     }
     75% {
         transform: scale(1.2);
-        background-color: #c1caab;
+        /* background-color: #c1caab; */
+        background-color: #F3EED9;
     }
     100% {
         transform: scale(1);
@@ -78,7 +78,7 @@
     }
     100% {
         transform: scale(1);
-        background-color:#f8c1c3;
+        background-color: #f8c1c3;
         border: 1px solid #f8c1c3;
     }
 }
