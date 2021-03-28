@@ -23,9 +23,7 @@ button {
     border: none;
     padding-left: 20px;
     padding-right: 20px;
-    /* font-size: 15px; */
     font-weight: 600;
-    /* padding: none; */
 }
 
 button:hover {
