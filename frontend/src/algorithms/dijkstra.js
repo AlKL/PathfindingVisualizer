@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-
-const dijkstra = (grid, startNode, endNode) => {
+const dijkstra = (startNode, endNode) => {
     let s = startNode;
     s.d = 0;
 
@@ -29,7 +27,6 @@ const dijkstra = (grid, startNode, endNode) => {
                     x = x.parent;
                 }
                 path.push(x);
-                // console.log(path);
                 return { path, visited };
             }
         }

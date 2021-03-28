@@ -1,9 +1,4 @@
 const aStar = (startNode, endNode) => {
-    //picks node with lowest value 'f'
-    //f = g + h
-    //g = movement cost from starting point to given square on a grid
-    //h = movement cost from g to final destination -> just a guess (heuristic)
-
     let openSet = [];
     let closedSet = [];
     let visitedNodes = [];

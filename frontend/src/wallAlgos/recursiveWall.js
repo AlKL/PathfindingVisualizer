@@ -1,5 +1,3 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-unused-vars */
 const recursiveWall = (grid, skew) => {
     let height = grid.length;
     let width = grid[0].length;
@@ -39,7 +37,6 @@ const divide = (grid, x, y, width, height, orientation, wallPath, skew) => {
             if (!(grid[wallY][wallX].isStart) && !(grid[wallY][wallX].isEnd)) {
                 wallPath.push(grid[wallY][wallX]);
                 grid[wallY][wallX].isWall = true;
-                // document.getElementById(`${wallY}-${wallX}`).className = 'node node-wall';
             }
         }
         wallX += dx;

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const visualizeShortestPath = (shortestPathNodes, speed) => {
     const reversed = shortestPathNodes.reverse();
     for (let k = shortestPathNodes.length - 1; k >= 0; k--) {

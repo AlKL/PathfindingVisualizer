@@ -32,10 +32,6 @@ const dfs = (startNode, endNode) => {
     visitedNodes = [];
     found = false;
     recDfs(startNode, endNode);
-    // visitedNodes.reverse();
-    // path.reverse();
-    // console.log(visitedNodes.length);
-    // console.log(path.length);
     return { path, visitedNodes };
 };
 

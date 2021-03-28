@@ -3,12 +3,7 @@ function Spot(i, j, rows, columns) {
     this.y = j;
     this.isStart = this.x === 14 && this.y === 10;
     this.isEnd = this.x === 14 && this.y === 50;
-    // this.isStart = this.x === 10 && this.y === 6;
-    // this.isEnd = this.x === 10 && this.y === 34;
     this.isWall = false;
-    // if (Math.random(1) < 0.2) {
-    //     this.isWall = true;
-    // }
     this.addneighbours = function (grid) {
         let i = this.x;
         let j = this.y;
@@ -26,9 +21,9 @@ function Spot(i, j, rows, columns) {
     this.previous = undefined;
 
     //BFS attributes
-    this.d = Infinity;      //node's distance
-    this.parent = null;     //node's parent
-    this.color = null;      //node's color
+    this.d = Infinity;
+    this.parent = null;
+    this.color = null;
 
     //DFS attribute
     this.visited = false;

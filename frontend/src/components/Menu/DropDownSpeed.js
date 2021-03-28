@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import '../../styles/DropDown.css';
 import arrowDown from '../../images/arrow_down.png';

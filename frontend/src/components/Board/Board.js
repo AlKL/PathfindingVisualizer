@@ -1,5 +1,3 @@
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import '../../styles/Board.css';
 import Node from '../Node/Node';
@@ -14,23 +12,18 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
         newBoard();
     }, []);
 
-    //newBoard function 
     const newBoard = () => {
-        //create grid matrix
         const grid = new Array(rows);
         for (let i = 0; i < rows; i++) {
             grid[i] = new Array(columns);
         }
         setGrid(grid);
-        //assign each grid square a new 'Spot'
         for (let i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
                 grid[i][j] = new Spot(i, j, rows, columns);
             }
         }
         addNeighbours(grid);
-        // setStartNode(grid[10][6]);
-        // setEndNode(grid[10][34]);
         setStartNode(grid[14][10]);
         setEndNode(grid[14][50]);
     };
@@ -44,11 +37,9 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
     };
 
     const setWall = (e) => {
-        // e.preventDefault();
         var eleArr = idToGridXY(e.target.id);
         var thisClassName = document.getElementById(e.target.id).className;
 
-        //Sets Walls
         if (e.type === 'mousedown' && !thisClassName.includes('node-start') && !thisClassName.includes('node-end')) {
             setWallState(true);
             document.getElementById(`${e.target.id}`).className = 'node node-wall';
@@ -60,7 +51,6 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
             setWallState(false);
         }
 
-        //Move Start Node
         else if (e.type === 'mousedown' && thisClassName.includes('node-start')) {
             //must set isStart/change start state/change color
             setStartState(true);
@@ -79,7 +69,6 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
             setStartNode(grid[eleArr[0]][eleArr[1]]);
         }
 
-        //Move End Node
         else if (e.type === 'mousedown' && thisClassName.includes('node-end')) {
             setEndState(true);
             document.getElementById(`${e.target.id}`).className = 'node';

@@ -1,10 +1,8 @@
 const bfs = (startNode, endNode) => {
-    var queue = []; //queue to traverse
-    var path = []; //resulting path to return
-    var visitedNodes = []; //all traversed nodes
+    var queue = [];
+    var path = [];
+    var visitedNodes = [];
     let u;
-
-    //reset every color and d
 
     startNode.d = 0;
     startNode.color = 'gray';
@@ -36,7 +34,7 @@ const bfs = (startNode, endNode) => {
             }
         }
     }
-    console.log('Error: unreachable log');
+
     return { path, visitedNodes };
 };
 
