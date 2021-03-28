@@ -142,6 +142,7 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
                 setVisSpeed={setVisSpeed}
             />
             <button onClick={resetBoard}>Reset Board</button>
+            <button> RANDOM BUTTON </button>
             {/* <button onClick={visualizeGreedyBfs}>Greedy Best-First Search</button> */}
         </div>
     );
