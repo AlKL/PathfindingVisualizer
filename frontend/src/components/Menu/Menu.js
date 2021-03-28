@@ -136,15 +136,12 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
                 dropName='Wall Patterns'
                 itemArray={mazeArray}
             />
-
-            <button onClick={resetBoard}>Reset Board</button>
-            <button onClick={clearBoard}>Clear Board [Keep Walls]</button>
-
+            {/* <button onClick={clearBoard}>Clear Board [Keep Walls]</button> */}
             <DropDownSpeed
                 initialSpeed={visSpeed}
                 setVisSpeed={setVisSpeed}
             />
-
+            <button onClick={resetBoard}>Reset Board</button>
             {/* <button onClick={visualizeGreedyBfs}>Greedy Best-First Search</button> */}
         </div>
     );
