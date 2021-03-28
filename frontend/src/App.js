@@ -9,7 +9,7 @@ const App = () => {
   const [grid, setGrid] = useState([]);
   const [startNode, setStartNode] = useState(null);
   const [endNode, setEndNode] = useState(null);
-  const rows = 29;
+  const rows = 28;
   const columns = 61;
 
   const clearBoard = () => {
