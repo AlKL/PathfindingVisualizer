@@ -12,7 +12,6 @@ const App = () => {
   const rows = 29;
   const columns = 61;
 
-  //does not clear walls
   const clearBoard = () => {
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
@@ -20,12 +19,9 @@ const App = () => {
         if (x.includes('node-visited') || x.includes('node-shortest-path')) {
           document.getElementById(`${i}-${j}`).className = 'node';
         }
-        // grid[i][j] = null;
         grid[i][j] = new Spot(i, j, rows, columns);
         if (x.includes('node-wall')) {
-          // console.log('WALL');
           grid[i][j].isWall = true;
-          // console.log(grid[i-1][j].neighbours);
         }
       }
     }
@@ -36,8 +32,6 @@ const App = () => {
       }
     }
 
-    // grid[10][6].isStart = false;
-    // grid[10][34].isEnd = false;
     grid[14][10].isStart = false;
     grid[14][50].isEnd = false;
 
@@ -45,10 +39,8 @@ const App = () => {
     grid[endNode.x][endNode.y].isEnd = true;
     setStartNode(grid[startNode.x][startNode.y]);
     setEndNode(grid[endNode.x][endNode.y]);
-    // console.log(startNode);
   };
 
-  //clears walls
   const resetBoard = () => {
     for (let i = 0; i < rows; i++) {
       for (let j = 0; j < columns; j++) {
@@ -90,10 +82,6 @@ const App = () => {
           setEndNode={setEndNode}
         />
       </div>
-      {/* <div className='message'>
-        {message}
-      </div> */}
-      {/* <Footer /> */}
     </div>
   );
 };

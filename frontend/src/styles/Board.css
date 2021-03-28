@@ -1,9 +1,9 @@
 .row-wrapper {
     display: flex;
+    width: 100%;
 }
 
-.board {
-    width: 99%;
-    /* margin: 0 auto; */
-    /* background-color: red; */
+.boardWrapper {
+    display: flex;
+    flex-direction: column;
 }

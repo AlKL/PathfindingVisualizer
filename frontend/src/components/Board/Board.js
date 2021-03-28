@@ -52,7 +52,6 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
         }
 
         else if (e.type === 'mousedown' && thisClassName.includes('node-start')) {
-            //must set isStart/change start state/change color
             setStartState(true);
             document.getElementById(`${e.target.id}`).className = 'node';
             grid[eleArr[0]][eleArr[1]].isStart = false;
@@ -93,7 +92,7 @@ const Board = ({ grid, rows, columns, setGrid, setStartNode, setEndNode }) => {
     };
 
     return (
-        <div className='board'>
+        <div className='boardWrapper'>
             {grid.map((row, rowIndex) => {
                 return (
                     <div key={rowIndex} className='row-wrapper'>

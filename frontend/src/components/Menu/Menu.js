@@ -14,7 +14,6 @@ import randomWall from '../../wallAlgos/randomWall';
 import DropDown from './DropDown';
 import DropDownSpeed from './DropDownSpeed';
 
-
 const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
     const [visSpeed, setVisSpeed] = useState('Fast');
 
@@ -142,7 +141,6 @@ const Menu = ({ grid, resetBoard, clearBoard, startNode, endNode }) => {
                 setVisSpeed={setVisSpeed}
             />
             <button onClick={resetBoard}>Reset Board</button>
-            <button> RANDOM BUTTON1 </button>
             {/* <button onClick={visualizeGreedyBfs}>Greedy Best-First Search</button> */}
         </div>
     );
